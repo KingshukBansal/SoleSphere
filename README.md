@@ -2,14 +2,6 @@
 
 Welcome to SoleSphere, the go-to online destination for the latest and trendiest footwear accessories! Whether you're looking to spice up your favorite pair of shoes or find the perfect addition to your collection, SoleSphere has you covered.
 
-## Table of Contents
-
-- [About SoleSphere](#about-solesphere)
-- [Key Features](#key-features)
-- [Getting Started](#getting-started)
-- [How to Contribute](#how-to-contribute)
-- [License](#license)
-
 ## About SoleSphere
 
 SoleSphere is an innovative e-commerce platform designed to provide a diverse range of footwear accessories to fashion enthusiasts worldwide. Our platform offers a seamless shopping experience, curated collections, and secure transactions.
