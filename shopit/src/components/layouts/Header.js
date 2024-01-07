@@ -17,9 +17,9 @@ const Header = () => {
         <>
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
                 <div className="container-fluid">
-                <MdShoppingBag size={'25px'}/>
+                <MdShoppingBag />
 
-                    <Link to="/"className="navbar-brand" href="#">SoleSphere</Link >
+                    <Link to="/"className="navbar-brand" href="#">SHOPIT</Link >
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
