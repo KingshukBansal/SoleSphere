@@ -6,6 +6,7 @@ const connectDB=require('./config/db');
 const authRouter=require('./routes/authRoutes');
 const categoryRouter=require('./routes/categoryRoutes');
 const productRouter=require('./routes/productRoutes');
+const brandRouter= require('./routes/brandRoutes');
 const cors=require('cors');
 // Load config
 dotenv.config();
@@ -22,6 +23,7 @@ app.use(express.json());
 // Mount routers
 app.use('/api/v1/auth',authRouter);
 app.use('/api/v1/category',categoryRouter);
+app.use('/api/v1/brand',brandRouter);
 app.use('/api/v1/product',productRouter);
 app.get('/',(req,res)=>{
     res.send('Hello World');

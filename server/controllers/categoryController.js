@@ -62,7 +62,7 @@ const getAllCategoriesController = async (req, res) => {
         res.status(200).send({success:true,message:"all categories fetched successfully",categories});
     } catch (error) {
         console.log(error);
-        res.status(400).send({success:false,error:e.message,messay:"internal server error"});
+        res.status(400).send({success:false,error:error.message,messay:"internal server error"});
     }
 }
 

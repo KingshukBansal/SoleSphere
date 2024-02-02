@@ -19,6 +19,13 @@ import Users from './pages/admin/Users';
 import Product from './pages/admin/Product';
 import CreateProduct from './pages/admin/CreateProduct';
 import UpdateProduct from './pages/admin/UpdateProduct';
+import BuyProduct from './pages/user/BuyProduct';
+import CreateBrand from './pages/admin/CreateBrand'
+import Search from './pages/Search';
+import ProductDetails from './pages/ProductDetails';
+import Category from './pages/Category';
+import CategoryProduct from './pages/CategoryProduct';
+import CartPage from './pages/CartPage';
 function App() {
   return (
     <>
@@ -26,9 +33,14 @@ function App() {
 <Routes>
   {/* General Routes */}
 <Route path="/" element={<Home/>}/>
+<Route path="/search" element={<Search/>}/>
+<Route path="/categories" element={<Category/>}/>
+<Route path="/category/:slug" element={<CategoryProduct/>}/>
 <Route path="/contact" element={<Contact/>}/>
 <Route path="/about" element={<About/>}/>
 <Route path="/policy" element={<Policy/>}/>
+<Route path="/product/:id" element={<ProductDetails/>}/>
+<Route path="/cart" element={<CartPage/>}/>
 {/* ////////////////////////////////////////////////// /////////////*/}
 
 
@@ -37,6 +49,7 @@ function App() {
 <Route path="user" element={<Dashboard/>}/>
 <Route path="user/profile" element={<Profile/>}/>
 <Route path="user/orders" element={<Orders/>}/>
+<Route path="user/product/:id" element={<BuyProduct/>}/>
   </Route>
 {/* /////////////////////////////////////////////////////////////// */}
 
@@ -45,6 +58,7 @@ function App() {
 <Route path="admin" element={<AdminDashboard/>}/>
 <Route path="admin/createproduct" element={<CreateProduct/>}/>
 <Route path="admin/createcategory" element={<CreateCategory/>}/>
+<Route path="admin/createbrand" element={<CreateBrand/>}/>
 <Route path="admin/products" element={<Product/>}/>
 <Route path='admin/product/:id' element={<UpdateProduct/>}/>
 <Route path="admin/users" element={<Users/>}/>

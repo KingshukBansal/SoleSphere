@@ -12,6 +12,9 @@ const CreateProduct = () => {
     name: '',
     price: '',
     category: '',
+    brand:'',
+    sizes:[],
+    discount:'',
     quantity: '',
     photo: '',
     shipping: '',
@@ -26,22 +29,30 @@ const CreateProduct = () => {
       formData.append('name', product.name);
       formData.append('price', product.price);
       formData.append('category', product.category);
+      formData.append('brand',product.brand);
+      formData.append('availableSizes',JSON.stringify(product.sizes));
+      formData.append('discount',product.discount);
       formData.append('quantity', product.quantity);
       formData.append('photo', product.photo);
       formData.append('shipping', product.shipping);
       formData.append('description', product.description);
-      console.log('FormData:', formData);
+
+      
+      console.log('FormData:', formData.name);
       const { data } = await axios.post('http://localhost:8080/api/v1/product/create-product', formData)
       if (data.success) {
         toast.success("Product is created")
         setProduct({
           name: '',
-          price: '',
-          category: '',
-          quantity: '',
-          photo: '',
-          shipping: '',
-          description: '',
+    price: '',
+    category: '',
+    brand:'',
+    sizes:[],
+    discount:'',
+    quantity: '',
+    photo: '',
+    shipping: '',
+    description: '',
         })
       }
     } catch (error) {

@@ -3,8 +3,12 @@ import { useState ,useEffect} from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import { Select } from 'antd'
+import { shoeSizes } from '../../data/data'
 const ProductForm = ({ handleCreate, product, setProduct }) => {
     const [category, setCategory] = useState([])
+    const [brand,setBrand]=useState([]);
+
+
 
     const getAllCategories = async (req, res) => {
         try {
@@ -17,6 +21,18 @@ const ProductForm = ({ handleCreate, product, setProduct }) => {
           toast.error("Categories is not fetched");
         }
       }
+    const getAllBrands = async (req,res)=>{
+        try {
+            const {data} = await axios.get('http://localhost:8080/api/v1/brand/all-brands');
+            console.log(data);
+            if(data.success){
+                setBrand(data.brands);
+
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
     
     const filterOption = (input, option) =>
         (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
@@ -28,6 +44,7 @@ const ProductForm = ({ handleCreate, product, setProduct }) => {
 
     useEffect(() => {
       getAllCategories();
+      getAllBrands();
     
 
     }, [])
@@ -48,6 +65,29 @@ const ProductForm = ({ handleCreate, product, setProduct }) => {
                 <input type='number' className="form-control" id="exampleFormControl1" rows="3" placeHolder='Quantity' name='quantity' value={product.quantity} onChange={handleChange}></input>
             </div>
             <div className="mb-3">
+                <input type='number' className="form-control" id="exampleFormControl1" rows="3" placeHolder='Discount' name='discount' value={product.discount} onChange={handleChange}></input>
+            </div>
+            <div className="mb-3">
+                <Select
+                    mode="multiple"
+                    showSearch
+                    placeholder="Select shoe sizes"
+                    optionFilterProp="children"
+                    style={{ width: "100%" }}
+                    name='sizes'
+                    value={product.sizes}
+                    onChange={(value)=>{setProduct({...product,sizes:value})}}
+                    filterOption={filterOption}
+                    options={[{value:'',
+                    label:"Select Available Sizes",
+                    disabled:true
+    },...shoeSizes.map((size) => ({
+                        value: size.value,
+                        label: size.name
+                    }))]}
+                />
+            </div>
+            <div className="mb-3">
                 <Select
                     showSearch
                     placeholder="Select a category"
@@ -62,6 +102,26 @@ const ProductForm = ({ handleCreate, product, setProduct }) => {
                         label: "Select Category",
                         disabled: true
                     }, ...category.map((c) => ({
+                        value: c._id,
+                        label: c.name
+                    }))]}
+                />
+            </div>
+            <div className="mb-3">
+                <Select
+                    showSearch
+                    placeholder="Select a brand"
+                    optionFilterProp="children"
+                    style={{ width: "100%" }}
+                    name='brand' value={product.brand}
+                    onChange={(value) => { setProduct({ ...product, brand: value }) }}
+                    // onSearch={onSearch}
+                    filterOption={filterOption}
+                    options={[{
+                        value: '',
+                        label: "Select Brand",
+                        disabled: true
+                    }, ...brand.map((c) => ({
                         value: c._id,
                         label: c.name
                     }))]}
@@ -100,8 +160,8 @@ const ProductForm = ({ handleCreate, product, setProduct }) => {
             <div className='mb-3'>
                 <label className='btn btn-outline-secondary col-md-12'>
 
-                    {product.photo ? product.photo.name : 'upload Photo'}
-                    <input type='file' name='photo' accept='images/*' onChange={(e) => { setProduct({ ...product, photo: e.target.files[0] }) }} hidden />
+                    {product.photo ? product.photo.name : 'upload Photo (size should be less than 1MB)'}
+                    <input type='file' name='photo' size='2097152' accept='images/*' onChange={(e) => { setProduct({ ...product, photo: e.target.files[0] }) }} hidden />
                 </label>
             </div>
             {product.photo ? <div className='mb-3'>

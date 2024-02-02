@@ -18,7 +18,7 @@ const Layout = ({children,title,description,keywords,author}) => {
 </Helment>
 <Header/>
 <ToastContainer/>
-<main >
+<main style={{backgroundColor:"#DAFFFB"}} >
 {children}
 </main>
 

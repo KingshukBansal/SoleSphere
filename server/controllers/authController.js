@@ -120,8 +120,43 @@ const forgotPasswordController=async(req,res)=>{
             return res.status(500).send({ success: false, message: "Server error", err });
         }
     };
+const updateProfileController = async(req,res)=>{
+    try {
+        const formData = req.body;
 
+        const user = await userModel.findById(req.user.id);
+        
+        if(formData.password && formData.password.length<=0){
+            res.status(200).send({success:false,message:"You have to put password"});
+        }
+         formData.password= formData.password?await hashPassword(formData.password): undefined;
+        const updateUser = await userModel.findByIdAndUpdate(req.user.id,{
+            name:formData.name  || user.name,
+            password: formData.password || user.password,
+            address:formData.address || user.address,
+            phone:formData.phone || user.phone
+        })
+        
+        if(!updateUser||updateUser.length){
+            throw error;
+        }
+        res.status(200).send({
+            success:true,
+            message:"Profile get updated Successfully",
+            user:{
+                name:updateUser.name,
+                email:updateUser.email,
+                phone:updateUser.phone,
+                address:updateUser.address,
+                role:updateUser.role,
+            }        })
 
-const authController={registerController,loginController,forgotPasswordController,testController}
+    } catch (error) {
+     console.log(error);
+     return res.status(400).send({success:false,message:"server error",error})   
+    }
+}
+
+const authController={registerController,loginController,forgotPasswordController,testController,updateProfileController}
 
 module.exports=authController;

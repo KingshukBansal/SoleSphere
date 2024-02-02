@@ -17,4 +17,6 @@ router.get('/adminauth',authMiddlewares.requireSignIn,authMiddlewares.isAdmin,(r
 }
 );
 
+router.put('/profile',authMiddlewares.requireSignIn,authController.updateProfileController);
+
 module.exports = router;

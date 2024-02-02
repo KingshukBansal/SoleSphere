@@ -8,6 +8,19 @@ const productSchema = new mongoose.Schema(
             required : true,
 
         },
+        brand:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'Brand',
+            required:true
+        },
+        availableSizes:{
+            type:Array,
+            required:true
+        },
+        discount:{
+            type:Number,
+            required:true
+        },
         slug:{
             type : String,
             required : true,
