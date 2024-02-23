@@ -2,12 +2,17 @@ import React, { useEffect, useState } from 'react'
 import Layout from '../components/layouts/Layout'
 import ShowCard from '../components/ShowCard';
 import { useAuth } from '../context/auth';
-
+import DropIn from "braintree-web-drop-in-react";
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/cart';
+import config from '../config/config';
 const CartPage = () => {
     const [cart,setCart] = useCart();
     const [auth,setAuth] = useAuth();
+    const [clientToken,setClientToken]=useState("");
+    const [instance,setInstance]=useState("");
+    const [loading,setLoading] = useState(false);
     const navigate = useNavigate();
     const removeItem = (id) =>{
       try {
@@ -39,6 +44,33 @@ const CartPage = () => {
         console.log(error);
       }
     }
+    const getPaymentToken=async()=>{
+try {
+  
+  const {data} = await axios.get(`${config.REACT_APP_API}/product/braintree/token`);
+  setClientToken(data?.clientToken);
+} catch (error) {
+  console.log(error);
+}
+    }
+
+    const handlePayment=async()=>{
+try {
+setLoading(true);
+const {nonce} = await instance.requestPaymentMethod();
+const {data} = await axios.post(`${config.REACT_APP_API}/product/braintree/payment/`,{cart,nonce});
+setLoading(false);
+localStorage.removeItem("cart");
+setCart([]);
+navigate('/dashboard/user/orders')
+} catch (error) {
+  console.log(error);
+  setLoading(false);
+}
+    }
+    useEffect(()=>{
+      getPaymentToken();
+    },[auth?.token])
 
   return (
     <Layout title={'Cart'} >
@@ -95,7 +127,9 @@ const CartPage = () => {
                   >
                     Update Address
                   </button>
+
                 </div>
+               
               </>
             ) : (
               <div className="mb-3">
@@ -120,7 +154,26 @@ const CartPage = () => {
                 )}
                 </div>
             )}
+
+             <div className="mt-2">
+            {!clientToken||!cart?.length ?(""):(
+              <>
+               <DropIn
+            options={{ authorization: clientToken,paypal:{
+              flow:'vault'
+            } }}
+            onInstance={(instance) => (setInstance(instance))}
+          />
+                    <button className='btn btn-primary' onClick={handlePayment} >{loading?"Processing":"Make Payment"}</button>
+              </>
+            )
+                  }
+
                    </div>
+
+                   </div>
+                   
+                   
 
                     </div>
 

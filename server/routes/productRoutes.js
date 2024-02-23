@@ -26,4 +26,11 @@ router.get('/search/:keyword',productControllers.searchProduct);
 router.get('/get-product-recommendation/:cid/:pid',productControllers.productRecommendation);
 
 router.get('/getProductsFromCategory/:slug',productControllers.getProductFromCategory);
+
+
+//payment routes
+
+router.get('/braintree/token',productControllers.brainTreeTokenGenerator);
+router.post('/braintree/payment',authMiddlewares.requireSignIn,productControllers.brainTreePayment)
+
 module.exports = router;

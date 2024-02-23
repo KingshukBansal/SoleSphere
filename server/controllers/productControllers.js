@@ -1,9 +1,12 @@
 
 const productModel = require("../models/productModel");
 const categoryModel = require("../models/categoryModel")
+const orderModel =require("../models/orderModel")
 const fs=require('fs');
 const slugify = require("slugify");
-
+const braintree=require("braintree");
+const dotenv = require("dotenv");
+dotenv.config();
 const createProduct = async (req, res) => {
     try {
     const {name,price,description,quantity,category,shipping,availableSizes}=req.fields;
@@ -253,6 +256,83 @@ const getProductFromCategory = async(req,res)=>{
         })
     }
 }
+
+
+//payment gateway
+var gateway = new braintree.BraintreeGateway({
+    environment: braintree.Environment.Sandbox,
+    merchantId: process.env.BRAINTREE_MERCHANT_ID,
+    publicKey: process.env.BRAINTREE_PUBLIC_KEY,
+    privateKey: process.env.BRAINTREE_PRIVATE_KEY,
+  });
+
+const brainTreeTokenGenerator = async(req,res)=>{
+try {
+    gateway.clientToken.generate({},function(err,response){
+        if(err){
+            res.status(500).send(err);
+        }
+        else{
+            res.status(200).send(response);
+        }
+    })
+    
+} catch (error) {
+    console.log(error);
+}
+}
+const brainTreePayment =async(req,res)=>{
+try {
+    const {cart,nonce} = req.body;
+    let total=0;
+    cart.map((i)=>{
+        total+=i.price;
+    })
+    let newTransaction =gateway.transaction.sale(
+        {
+          amount: total,
+          paymentMethodNonce: nonce,
+          options: {
+            submitForSettlement: true,
+          },
+        },
+        function (err, result) {
+          if (err) {
+            console.error(err);
+            res.status(500).send({message:"internal server error"})
+            return;
+          }
+          console.log(req.user);
+          if (result.success) {
+            const Order = new orderModel({
+                products:cart,
+                buyer:req.user.id,
+                payment:result
+            }).save();
+            res.status(200).send({ok:true});
+          } else {
+            console.error(result.message);
+            res.status(500).send({message:result.message})
+          }
+        }
+      );
+} catch (error) {
+    console.log(error);
+    res.status(400).send({message:"Internal server error"});
+}
+}
+
+const getOrderController = async(req,res)=>{
+try {
+    const orders = await orderModel.find({buyer:req.user.id}).populate('products','-photo').populate('buyer','name');
+    console.log(orders);
+    res.status(200).send({success:true,orders});
+    
+} catch (error) {
+    console.error(error);
+    res.status(400).send({message:"orders error"})
+}
+}
 const productControllers={
     createProduct,
     getAllProducts,
@@ -266,7 +346,9 @@ const productControllers={
     searchProduct,
     productRecommendation,
     getProductFromCategory,
-
+    brainTreePayment,
+    brainTreeTokenGenerator,
+    getOrderController
 }
 
 module.exports=productControllers;
