@@ -17,8 +17,11 @@ const Layout = ({children,title,description,keywords,author}) => {
 
 </Helment>
 <Header/>
-<ToastContainer/>
 <div className='bg-secondary h-auto min-h-full' >
+<div className=''>
+
+<ToastContainer position='bottom-right'/>
+</div>
 {children}
 </div>
 

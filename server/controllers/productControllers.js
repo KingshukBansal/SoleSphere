@@ -116,8 +116,8 @@ const updateProduct=async(req,res)=>{
 const filterProduct = async (req, res) => {
     try {
         const { categories, price, brands, sizes, discount } = req.body;
-        productsPerPage=2;
-        const page=req.params.page;
+        productsPerPage=8;
+        const page=req.params.page!=1?req.params.page:2;
         let args = {};
         if (categories.length) {
             args.category={$in:categories};

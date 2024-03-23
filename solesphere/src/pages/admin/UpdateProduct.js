@@ -79,8 +79,9 @@ const UpdateProduct = () => {
             <AdminMenu />
           </div>
 
-          <div className='col-md-9'>
-            <div className='card w-100 p-3'>
+          <div className='w-3/4 m-4 flex bg-tertiary rounded-2xl justify-center  max-tablet:w-auto'>
+            <div className='p-2 w-2/3 flex flex-col items-center max-tablet:w-auto'>
+             
                 {product && Object.keys(product).length > 0?<UpdateProductForm product={product} setProduct={setProduct} handleUpdate={handleUpdate} handleDelete={handleDelete}/>:""}
             </div>
           </div>
