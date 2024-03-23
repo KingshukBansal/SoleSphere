@@ -13,11 +13,11 @@ const Spinner = ({path='login'}) => {
         return ()=>clearInterval(interval);
     },[count,history,location]);
   return (
-<div className="d-flex justify-content-center align-items-center" style={{height:'100vh'}}>
+<div className="flex justify-center items-center" style={{height:'100vh'}}>
   <div className="spinner-border" role="status">
-    <span className="visually-hidden">Loading...</span>
+    <span className="loading loading-spinner loading-lg"></span>
   </div>
-  <h1 className="text-center">Redirecting you in {count} seconds</h1>
+  <h1 className="text-center text-2xl font-bold ms-4">Redirecting you in {count} seconds</h1>
 </div>
   )
 }

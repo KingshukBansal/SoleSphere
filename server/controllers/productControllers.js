@@ -34,7 +34,7 @@ const createProduct = async (req, res) => {
 
 const getAllProducts=async(req,res)=>{
     try {
-        const products=await productModel.find({}).populate('category').select('-photo').limit(10).sort({createdAt:-1});
+        const products=await productModel.find({}).populate('category').select('-photo').limit(25).sort({createdAt:-1});
         res.status(200).send({success:true,message:"all products get fetched",products});
     } catch (error) {
         console.log(error);
