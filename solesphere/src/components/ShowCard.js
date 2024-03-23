@@ -4,22 +4,20 @@ import { Link } from 'react-router-dom'
 const ShowCard = ({products,admin}) => {
   return (
     <>
-   <div class="container text-center">
-  <div class="row row-cols-auto">
     {
-        products.map((product)=>{
+        products.map((product,i)=>{
             return (
               admin===false?
-            <div class="col">
+            <div >
             
-                 <Link to={`/product/${product._id}`} style={{textDecoration:'none'}}>
+                 <Link to={`/product/${product._id}`} >
                  <CardTemplate product={product} admin={admin}/>
                  </Link>
             
             </div>
             :
-            <div class="col">
-                <Link to={`/dashboard/admin/product/${product._id}` } style={{textDecoration:'none'}}>
+            <div >
+                <Link to={`/dashboard/admin/product/${product._id}` } >
                 <CardTemplate product={product} admin={true}/>
                 </Link>
             </div>
@@ -27,8 +25,7 @@ const ShowCard = ({products,admin}) => {
         })
     }
 
-  </div>
-</div>
+
   </>
   )
 }

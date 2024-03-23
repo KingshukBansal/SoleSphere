@@ -85,17 +85,19 @@ const AdminOrder = () => {
   }, [auth?.token]);
   return (
     <Layout title="Dashboard">
-      <div className="container-fluid" style={{ minHeight: "100vh" }}>
-        <div className="row">
-          <div className="col-md-3 text-center p-0">
+      <div className="">
+
+      <div className='flex flex-row max-tablet:flex-col'>
+            <div className='w-1/4 text-center p-0 max-tablet:w-full'>
             <AdminMenu />
           </div>
 
-          <div className="col-md-9 mt-4">
-            <div className="card w-100 p-3">
-              <table className="table">
-                <thead>
-                  <tr>
+          <div className='w-3/4 m-4 flex bg-tertiary rounded-2xl justify-center max-tablet:w-auto'>
+            <div className='p-5 flex flex-col max-tablet:w-auto'>
+            <h3 className='text-4xl text-center font-bold mb-12 '>Orders</h3>
+              <table className="table bg-white m-4">
+                <thead className="">
+                  <tr className="">
                     <th>#</th>
                     <th>order id</th>
                     <th>order status</th>
@@ -120,7 +122,7 @@ const AdminOrder = () => {
                           <td>{o?.payment[0]?.transaction?.amount}</td>
                           <td>
                             <Dropdown menu={{items,onClick:(e)=>handleMenuClick(e,o?._id)}} >
-                              <Button>
+                              <Button >
                                 <Space>
                                 {selectedStatus[o?._id] || o?.status}                                 
                                  <DownOutlined />
@@ -134,7 +136,7 @@ const AdminOrder = () => {
                 </tbody>
               </table>
 
-              <button className="btn btn-primary" onClick={(e)=>handleUpdate()}>Update</button>
+              <button className="btn btn-primary m-4 w-full" onClick={(e)=>handleUpdate()}>Update</button>
             </div>
           </div>
         </div>

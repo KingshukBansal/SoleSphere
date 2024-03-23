@@ -3,6 +3,7 @@ import Layout from '../../components/layouts/Layout'
 import AdminMenu from '../../components/layouts/AdminMenu'
 
 import {useAuth} from '../../context/auth';
+import { json } from 'react-router-dom';
 const Dashboard = () => {
     const [auth,setAuth] = useAuth();
   return (
@@ -10,17 +11,18 @@ const Dashboard = () => {
      <div className='container-fluid' style={{minHeight:'100vh' }} >
 
     
-        <div className='row'>
-            <div className='col-md-3 text-center p-0'>
+        <div className='flex flex-row'>
+            <div className='w-1/4 text-center p-0 '>
         
         <AdminMenu/>
         </div>
 
-        <div className='col-md-9'>
-            <div className='card w-75 p-3'>
+        <div className='w-3/4 m-4 p-4 bg-tertiary rounded-2xl'>
+            <div className='p-3 text-2xl'>
                 <h3>Admin Name: {auth?.user?.name}</h3>
                 <h3>Admin Email: {auth?.user?.email}</h3>
                 <h3>Admin Phone: {auth?.user?.phone}</h3>
+                <h3>Admin Address: {auth?.user?.address}</h3>
             </div>
         </div>
     </div>

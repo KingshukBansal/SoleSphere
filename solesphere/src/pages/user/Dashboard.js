@@ -9,14 +9,14 @@ const Dashboard = () => {
     <div className='container-fluid' style={{minHeight:'100vh' }} >
 
    
-       <div className='row'>
-           <div className='col-md-3 text-center p-0'>
+       <div className='flex flex-row'>
+           <div className='w-1/4 text-center p-0'>
        
        <UserMenu/>
        </div>
 
-       <div className='col-md-9'>
-           <div className='card w-75 p-3'>
+       <div className='w-3/4 m-4 p-4 bg-tertiary rounded-2xl'>
+            <div className='p-3 text-2xl'>
                <h3>Name: {auth?.user?.name}</h3>
                <h3>Email: {auth?.user?.email}</h3>
                <h3>Phone: {auth?.user?.phone}</h3>

@@ -100,37 +100,34 @@ const CreateCategory = () => {
   }, [deleteCategory]);
   return (
     <Layout title='Create Categroies'>
-      <div className='container-fluid' style={{ minHeight: '100vh' }} >
+      <div  >
 
-
-        <div className='row'>
-          <div className='col-md-3 text-center p-0'>
+      <div className='flex flex-row max-tablet:flex-col'>
+            <div className='w-1/4 text-center p-0 max-tablet:w-full'>
 
             <AdminMenu />
           </div>
 
-          <div className='col-md-9'>
-            <div className='card w-75 p-3'>
-              <h3>Manage Category</h3>
-              <hr />
+          <div className='w-3/4 m-4 flex bg-tertiary rounded-2xl justify-center  max-tablet:w-auto'>
+            <div className='p-2 w-2/3 flex flex-col items-center max-tablet:w-auto'>
+              <h3 className='text-4xl font-bold mb-12 '>Manage Category</h3>
               <CategoryFrom handleSubmit={handleSubmit} value={value} setValue={setValue} />
 
-              <hr />
-              <table className="table">
-                <thead>
-                  <tr>
+              <table className=" w-full bg-white rounded-2xl p-4 overflow-hidden max-tablet:rounded-lg ">
+                <thead className='rounded-2xl'>
+                  <tr className=' bg-primary text-xl text-black rounded-2xl'>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Action</th>
+                    <th scope="">Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   {category.map((c, index) => (
-                    <tr>
-                      <th scope="row">{index + 1}</th>
-                      <td key={c._id}>{c.name}</td>
-                      <td><button type="button" onClick={() => { setVisible(true); setPrevCategory(c); }} class="btn btn-primary">Edit</button>
-                        <button type="button" onClick={() => { setDeleteCategory(c) }} class="btn btn-danger ms-2">Delete</button>
+                    <tr className='p-2 border'>
+                      <th scope="row" className='max-tablet:px-2'>{index + 1}</th>
+                      <td className='p-2 ' key={c._id}>{c.name}</td>
+                      <td className='p-2 flex flex-row justify-around'><button type="button" className="btn btn-primary hover:scale-[1.1] w-1/3" onClick={() => { setVisible(true); setPrevCategory(c); }}>Edit</button>
+                        <button type="button" onClick={() => { setDeleteCategory(c) }} class="btn btn-dange bg-red-400 hover:bg-red-500 hover:scale-[1.1] w-1/3">Delete</button>
                       </td>
                     </tr>
                   ))}

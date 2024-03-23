@@ -7,9 +7,8 @@ const Users = () => {
     <Layout title='All Users'>
     <div className='container-fluid' style={{minHeight:'100vh' }} >
 
-   
-       <div className='row'>
-           <div className='col-md-3 text-center p-0'>
+    <div className='flex flex-row'>
+            <div className='w-1/4 text-center p-0 '>
        
        <AdminMenu/>
        </div>

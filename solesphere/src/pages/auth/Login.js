@@ -48,59 +48,70 @@ const Login = () => {
 
   return (
 <Layout title={'Login'} description={'Login to shopIT'}>
-<section className="h-auto" style={{ backgroundColor: '#eee',minHeight:'100vh' }}>
-                <div className="container h-100 " >
-                    <div className="row d-flex justify-content-center align-items-center h-100">
-                        <div className="col-lg-12 col-xl-11">
-                            <div className="card text-black " style={{ borderRadius: '25px' , marginTop:'2rem',marginBottom:'2rem' }}>
-                                <div className="card-body p-md-5 ">
-                                    <div className="row justify-content-center">
-                                         <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-1">
-                                            <img src="https://img.freepik.com/free-vector/global-data-security-personal-data-security-cyber-data-security-online-concept-illustration-internet-security-information-privacy-protection_1150-37336.jpg?w=826&t=st=1704136017~exp=1704136617~hmac=39e750b98f9ed81f8b8b5a57c8f0b7a323ecf4495be10a122b6f4a629ea808aa" className="img-fluid" alt="Sample_image" />
-                                        </div>
-                                        <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-2 my-auto">
-                                            <p className="text-center h1 fw-bold mb-4 mx-1 mx-md-4 mt-4">Login</p>
-                                            <form className="mx-1 mx-md-4" onSubmit={handleSubmit}>
+      <section className="h-[90vh] bg-secondary flex flex-row justify-center">
+        <div className=" bg-white w-1/2 self-center rounded-[1.2rem] max-tablet:w-full max-tablet:m-4">
+          <div className="flex flex-col justify-center items-center h-{100px}">
+                <p className="text-center text-4xl font-bold mb-4 mx-1 max-md:mx-4 mt-4 max-tablet:text-2xl">
+                  Log in
+                </p>
+            <div className="flex flex-row justify-center max-tablet:flex-col">
+              <div className="m-4 order-1 max-tablet:order-2">
 
-                                                <div className="d-flex flex-row align-items-center mb-2">
-                                                    <i className="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                                                    <div className="form-outline flex-fill mb-0">
-                                                        <input type="email" id="form3Example3c" className="form-control" name="email" value={formData.email} onChange={handleChange} />
-                                                        <label className="form-label" htmlFor="form3Example3c">Your Email</label>
-                                                    </div>
-                                                </div>
-                                                <div className="d-flex flex-row align-items-center mb-2">
-                                                    <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
-                                                    <div className="form-outline flex-fill mb-0">
-                                                        <input type="password" id="form3Example4c" className="form-control" name="password" value={formData.password} onChange={handleChange} />
-                                                        <label className="form-label" htmlFor="form3Example4c">Password</label>
-                                                    </div>
-                                                </div>
-                                                <div className="form-check d-flex justify-content-center mb-5">
-                                                    <input className="form-check-input me-2" type="checkbox" value="" id="form2Example3c" required/>
-                                                    <label className="form-check-label" htmlFor="form2Example3">
-                                                        I agree all statements in <a href="#!">Terms of service</a>
-                                                    </label>
-                                                </div>
-                                                <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                                    <button type="submit" className="btn btn-primary btn-lg">Login</button>
-                                                </div>
-                                                <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                                    
-                                                    <button type="button" className="btn" onClick={() => { history('/forgotpassword') }} style={{ backgroundColor: 'transparent', color: 'black', border: 'none' }}>
-                                                        Forgot Password
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        </div>
+                <form className="mx-1 max-md:mx-4" onSubmit={handleSubmit}>
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                  <div className="flex-col flex m-1 items-left ">
+                      <label className="form-label text-lg m-1" htmlFor="form3Example3c">
+                        Email:
+                      </label>
+                    <div className="form-outline flex-fill m-1">
+                      <input
+                        type="email"
+                        placeholder="Your Email"
+                        className="input input-bordered border-black-500 w-full max-w-xs rounded-lg h-8 p-2"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                      />
                     </div>
-                </div>
-            </section></Layout>
+                  </div>
+                  <div className="flex-col flex m-1 items-left ">
+                  <label className="form-label text-lg m-1" htmlFor="form3Example4c">
+                        Password
+                      </label>
+                    <div className="form-outline flex-fill m-1">
+                      <input
+                        type="password"
+                        id="form3Example4c"
+                        placeholder="Your Password"
+                        className="input input-bordered border-black-500 w-full max-w-xs rounded-lg h-8 p-2"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                      />
+
+                    </div>
+                  </div>
+                 
+
+                  <div className="flex justify-left m-4 ">
+                    <button type="submit" className="btn btn-primary btn-lg ">
+                      Login
+                    </button>
+                  </div>
+                </form>
+              </div>
+              <div className="flex items-center order-1 w-2/3 min-w-24 overflow-hidden rounded-2xl mb-12 max-tablet:justify-items-center max-tablet:w-full max-tablet:mb-2">
+                <img
+                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                  className="rounded-2xl h-full w-full "
+                  alt="Sample_image"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </Layout>
   )
 }
 

@@ -9,7 +9,7 @@ const CategoryProduct = () => {
     const [products,setProducts]= useState();
 
     const getProductsFromCategory = async(req,res) =>{
-        try {
+        try {      setProducts();
             const {data} = await axios.get(`${config.REACT_APP_API}/product/getProductsFromCategory/${category}`);
                  setProducts(data.products);
 
@@ -19,18 +19,21 @@ const CategoryProduct = () => {
     }
     useEffect(()=>{
         getProductsFromCategory();
-    },[])
+    },[category])
   return (
 <Layout title={`Products-${category}`}>
-      <div className="container">
-      <h1 className='text-center'>ALL PRODUCTS - {category.toUpperCase()}</h1>
-          <div className="d-flex flex-wrap">
+<div className="flex flex-col">
+
+      <div className='font-bold text-center text-4xl m-4 max-tablet:text-2xl'> ALL PRODUCTS - {category.toUpperCase()}</div>
+
+      <div className="grid grid-cols-4 gap-y-2 gap-x-2 max-md:grid-cols-1 max-laptop:grid-cols-2 max-desktop:grid-cols-3 m-4">
             {products? 
             <ShowCard products={products} admin = {false} />:
             <div></div>
             }
           </div>
-      </div>
+          </div>
+
 </Layout>
   )
 }

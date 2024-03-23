@@ -1,87 +1,184 @@
-import React from 'react'
-import {Link } from 'react-router-dom'
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { MdShoppingBag } from "react-icons/md";
-import { useAuth } from '../../context/auth';
-import { toast } from 'react-toastify';
-import SearchInput from '../forms/SearchInput';
-import useCategories from '../../hooks/useCategories';
-import { Badge } from 'antd';
-import { useCart } from '../../context/cart';
+import { useAuth } from "../../context/auth";
+import { toast } from "react-toastify";
+import SearchInput from "../forms/SearchInput";
+import useCategories from "../../hooks/useCategories";
+import { Badge } from "antd";
+import { RxHamburgerMenu } from "react-icons/rx";
+
+import { useCart } from "../../context/cart";
 const Header = () => {
-    const [auth,setAuth] = useAuth();
-    const categories = useCategories();
-    const [cart,setCart] = useCart();
-    const handleLogout = () => {
-        setAuth({...auth,
-            user:null,
-            token:"",
-        });
-        localStorage.removeItem('auth');
-        toast.success('Logout successfully');
-    }
-    return (
-        <>
-            <nav className="navbar navbar-expand-lg " style={{backgroundColor:"#176B87"}}>
-                <div className="container-fluid">
-                <MdShoppingBag />
+  const [auth, setAuth] = useAuth();
+  const categories = useCategories();
+  const [cart, setCart] = useCart();
+  const handleLogout = () => {
+    setAuth({ ...auth, user: null, token: "" });
+    setCart([]);
+    localStorage.removeItem("cart");
+    localStorage.removeItem("auth");
+    toast.success("Logout successfully");
+  };
+  return (
+    <>
+      <nav className="bg-primary flex justify-between flex-start h-14 items-center text-white text-base ">
+        <div className="flex flex-start justify-around   items-center ms-8 max-tablet:w-full">
+          <MdShoppingBag size={"3rem"} />
 
-                    <Link to="/"className="navbar-brand" href="#">SOLESPHERE</Link >
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <SearchInput/>
-                            <li className="nav-item">
-                                <Link to="/"className="nav-link active" aria-current="page" >Home</Link >
-                            </li>
-                            <li class="nav-item dropdown">
-          <Link to={'/categories'} className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Category
-          </Link>
-          <ul class="dropdown-menu">
-            <li><Link to={'/categories'} className='dropdown-item'>All Categories</Link></li>
+          <Link
+            className="text-2xl max-tablet:hidden max-tablet:justify-items-center mt-0"
+            to="/"
+            href="#"
+          >
             
-                {
-                    categories.map((c)=>{
-                        return (
-                            <l1>
-                                <Link to={`/category/${c.slug}`} className='dropdown-item' key={c._id}>{c.name}</Link>
-                                </l1>
-                            )
-                    })
-                }
-          </ul>
-        </li>
-                           {!auth.user?(<>
-                            <li className="nav-item">
-                                <Link to="/register"className="nav-link">Register</Link >
-                            </li>
+            SOLESPHERE
+          </Link>
+        </div>
+        <div className="flex flex-row justify-around max-tablet:hidden">
+          <div className="items-center flex flex-row m-1 max-desktop:hidden">
+            <SearchInput />
+          </div>
+          <div className="">
+            <ul className="flex flex-row justify-between w-5/5 p-3 m-1 ">
+              <li className="headerList">
+                <Link to="/" className="" aria-current="page">
+                  Home
+                </Link>
+              </li>
+              <li class="headerList">
+                <div className="dropdown dropdown-hover">
+                  <div tabIndex={0} role="button" className="">
+                    Category
+                  </div>
+                  <ul
+                    tabIndex={0}
+                    className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 text-black"
+                  >
                     
-                            <li className="nav-item">
-                                <Link to="/login"className="nav-link">Login</Link >
-                            </li></>):(<>
-                                <li className="nav-item">
-                                <Link to={`/dashboard/${auth?.user?.role===1?'admin':'user'}`}className="nav-link">Dashboard</Link >
-                            </li>
-                                <li className="nav-item">
-                                <Link onClick={handleLogout} to="/"className="nav-link">Logout</Link >
-                            </li>
-                            </>
+                      <Link to={"/categories" }><li className="hover:bg-slate-200 hover:rounded-lg p-1">All Categories                    </li>
+</Link>
 
-                            )}
-                            <li className="nav-item">
-                                <Badge count={cart?.length}>
-
-                                <Link to="/cart"className="nav-link">Cart</Link >
-                                </Badge>
-                            </li>
-                        </ul>
-                    </div>
+                    {categories.map((c) => {
+                      return (
+                        <l1 className="hover:bg-slate-200 hover:rounded-lg p-1">
+                          <Link to={`/category/${c.slug}`} key={c._id} >
+                            {c.name}
+                          </Link>
+                        </l1>
+                      );
+                    })}
+                  </ul>
                 </div>
-            </nav>
-        </>
-    )
-}
+              </li>
+              {!auth.user ? (
+                <>
+                  <li className="headerList">
+                    <Link to="/register" className="nav-link">
+                      Register
+                    </Link>
+                  </li>
 
-export default Header
+                  <li className="headerList">
+                    <Link to="/login" className="nav-link">
+                      Login
+                    </Link>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li className="headerList">
+                    <Link
+                      to={`/dashboard/${
+                        auth?.user?.role === 1 ? "admin" : "user"
+                      }`}
+                      className="nav-link"
+                    >
+                      Dashboard
+                    </Link>
+                  </li>
+                  <li className="hederList">
+                    <Link onClick={handleLogout} to="/" className="nav-link">
+                      Logout
+                    </Link>
+                  </li>
+                </>
+              )}
+              <li className="headerList">
+                <Badge count={cart?.length} colorText="#FFFFFF">
+                  <Link to="/cart" className="text-white text-base">
+                    Cart
+                  </Link>
+                </Badge>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className="hidden max-tablet:block me-3">
+          <div className="dropdown dropdown-end">
+            <div tabIndex={0} role="button" className="">
+              <RxHamburgerMenu size={"2rem"} />
+            </div>
+            <ul
+              tabIndex={0}
+              className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 text-black"
+            >
+              <li className="headerList">
+                <Link to="/" className="" aria-current="page">
+                  Home
+                </Link>
+              </li>
+              <li className="headerList">
+                <Link to="/categories" className="" aria-current="page">
+                  Categories
+                </Link>
+              </li>
+              {!auth.user ? (
+                <>
+                  <li className="headerList">
+                    <Link to="/register" className="nav-link">
+                      Register
+                    </Link>
+                  </li>
+
+                  <li className="headerList">
+                    <Link to="/login" className="nav-link">
+                      Login
+                    </Link>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li className="headerList">
+                    <Link
+                      to={`/dashboard/${
+                        auth?.user?.role === 1 ? "admin" : "user"
+                      }`}
+                      className="nav-link"
+                    >
+                      Dashboard
+                    </Link>
+                  </li>
+                  <li className="hederList">
+                    <Link onClick={handleLogout} to="/" className="nav-link">
+                      Logout
+                    </Link>
+                  </li>
+                </>
+              )}
+              <li className="headerList">
+                <Badge count={cart?.length} colorText="#FFFFFF">
+                  <Link to="/cart" className="text-black ">
+                    Cart
+                  </Link>
+                </Badge>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </>
+  );
+};
+
+export default Header;

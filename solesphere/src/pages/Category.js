@@ -1,25 +1,27 @@
 import React from 'react'
 import useCategories from '../hooks/useCategories'
-import { Button } from 'antd';
 import { Link } from 'react-router-dom';
+import Layout from '../components/layouts/Layout'
 const Category = () => {
     const categories = useCategories();
   return (<>
-  <div className="container column">
+    <Layout title={"All Products - Best Offers"}>
 
-    <div> All Categories</div>
-    <div className="row">
+  <div className="flex flex-col">
+
+    <div className='font-bold text-center w-full text-4xl m-4'> All Categories</div>
+    <div className="grid grid-cols-4 gap-2 m-4 ">
         {
             categories.map((c)=>{
                 return(
 
-                    <Button style={{width:"20vw", margin:"0.25vw", backgroundColor:"black", color:"white", textDecoration:"none"}}><Link to={`/category/${c.slug}`}>{c.name}</Link></Button>
+                   <Link to={`/category/${c.slug}`} > <button className='btn bg-tertiary w-full'>{c.name}</button></Link>
                     )
             })
         }
     </div>
   </div>
-
+</Layout>
   </>
   )
 }

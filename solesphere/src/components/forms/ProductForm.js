@@ -53,21 +53,21 @@ const ProductForm = ({ handleCreate, product, setProduct }) => {
     return (
         <>
             <div className="mb-3">
-                <input type="email" className="form-control" id="exampleFormControlInput1" placeHolder="Name" name='name' value={product.name} onChange={handleChange} />
+                <input type="email" className="rounded-xl p-2 outline-blue-700 outline-[1px] w-full" id="exampleFormControlInput1" placeHolder="Name" name='name' value={product.name} onChange={handleChange} />
             </div>
             <div className="mb-3">
-                <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" placeHolder='Description' name='description' value={product.description} onChange={handleChange}></textarea>
+                <textarea className="rounded-xl p-2  outline-blue-700 outline-[1px] w-full " id="exampleFormControlTextarea1" rows="3" placeHolder='Description' name='description' value={product.description} onChange={handleChange}></textarea>
             </div>
             <div className="mb-3">
-                <input type='number' className="form-control" id="exampleFormControl1" rows="3" placeHolder='Price' name='price' value={product.price} onChange={handleChange}></input>
+                <input type='number' className="rounded-xl p-2  outline-blue-700 outline-[1px] w-full" id="exampleFormControl1" rows="3" placeHolder='Price' name='price' value={product.price} onChange={handleChange}></input>
             </div>
             <div className="mb-3">
-                <input type='number' className="form-control" id="exampleFormControl1" rows="3" placeHolder='Quantity' name='quantity' value={product.quantity} onChange={handleChange}></input>
+                <input type='number' className="rounded-xl p-2  outline-blue-700 outline-[1px] w-full " id="exampleFormControl1" rows="3" placeHolder='Quantity' name='quantity' value={product.quantity} onChange={handleChange}></input>
             </div>
             <div className="mb-3">
-                <input type='number' className="form-control" id="exampleFormControl1" rows="3" placeHolder='Discount' name='discount' value={product.discount} onChange={handleChange}></input>
+                <input type='number' className="rounded-xl p-2  outline-blue-700 outline-[1px] w-full " id="exampleFormControl1" rows="3" placeHolder='Discount' name='discount' value={product.discount} onChange={handleChange}></input>
             </div>
-            <div className="mb-3">
+            <div className="mb-3 ">
                 <Select
                     mode="multiple"
                     showSearch
@@ -158,7 +158,7 @@ const ProductForm = ({ handleCreate, product, setProduct }) => {
             </div>
 
             <div className='mb-3'>
-                <label className='btn btn-outline-secondary col-md-12'>
+                <label className='btn btn-outline-secondary col-md-12 rounded-xl p-2  outline-blue-700 outline-[1px] w-full bg-white'>
 
                     {product.photo ? product.photo.name : 'upload Photo (size should be less than 1MB)'}
                     <input type='file' name='photo' size='2097152' accept='images/*' onChange={(e) => { setProduct({ ...product, photo: e.target.files[0] }) }} hidden />
@@ -175,7 +175,7 @@ const ProductForm = ({ handleCreate, product, setProduct }) => {
                 </div>
             </div> : ""}
             <div className="mb-3">
-                <button type="submit" className="btn btn-primary btn-lg" onClick={handleCreate}>Submit</button>
+                <button type="submit" className="btn btn-primary rounded-xl w-full" onClick={handleCreate}>Submit</button>
 
             </div>
 
