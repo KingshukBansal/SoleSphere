@@ -1,7 +1,7 @@
 // config.js
 
 const config = {
-    REACT_APP_API:'http://localhost:8080/api/v1',
+    REACT_APP_API:'https://sole-sphere-backend.vercel.app/',
     // Add other configuration variables as needed
   };
   
