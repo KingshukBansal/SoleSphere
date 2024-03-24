@@ -6,7 +6,6 @@ import { Checkbox, Radio } from "antd";
 import { prices, validDiscount, shoeSizes } from "../data/data";
 import config from "../config/config";
 import Filters from "../components/Filters";
-const apiUrl = process.env.REACT_APP_API;
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -64,7 +63,7 @@ const Home = () => {
   const getAllBrands = async (req, res) => {
     try {
       const { data } = await axios.get(
-        "http://localhost:8080/api/v1/brand/all-brands"
+        `${config.REACT_APP_API}/brand/all-brands`
       );
       if (data.success) {
         setBrands(data.brands);

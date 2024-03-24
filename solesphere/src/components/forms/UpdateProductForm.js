@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Select } from "antd";
+import config from "../../config/config";
 const UpdateProductForm = ({
   handleUpdate,
   product,
@@ -13,7 +14,7 @@ const UpdateProductForm = ({
   const getAllCategories = async (req, res) => {
     try {
       const { data } = await axios.get(
-        "http://localhost:8080/api/v1/category/all-categories"
+        `${config.REACT_APP_API}/category/all-categories`
       );
       if (data.success) {
         setCategory(data.categories);
@@ -52,7 +53,7 @@ const UpdateProductForm = ({
         <div className="mb-3 w-full">
           <div className="text-center">
             <img
-              src={`http://localhost:8080/api/v1/product/get-photo/${product._id}`}
+              src={`${config.REACT_APP_API}/product/get-photo/${product._id}`}
               alt="product_photo"
               className="h-fit overflow-hidden max-tablet:max-w-[170px] max-tablet:self-center"
               />

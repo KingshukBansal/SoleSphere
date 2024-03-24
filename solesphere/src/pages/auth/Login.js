@@ -4,6 +4,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import {useNavigate, useLocation} from 'react-router-dom';
 import { useAuth } from '../../context/auth';
+import config from '../../config/config';
 const Login = () => {
     const [formData, setFormData] = useState({
         email: '',
@@ -21,7 +22,7 @@ const Login = () => {
         e.preventDefault();
 
         try{
-            const res= await axios.post("http://localhost:8080/api/v1/auth/login",formData);
+            const res= await axios.post(`${config.REACT_APP_API}/auth/login`,formData);
             if(res.data.success){
                 toast.success('Login Success');
                 setAuth({

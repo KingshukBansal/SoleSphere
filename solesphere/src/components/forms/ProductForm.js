@@ -4,6 +4,7 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import { Select } from 'antd'
 import { shoeSizes } from '../../data/data'
+import config from '../../config/config'
 const ProductForm = ({ handleCreate, product, setProduct }) => {
     const [category, setCategory] = useState([])
     const [brand,setBrand]=useState([]);
@@ -12,7 +13,7 @@ const ProductForm = ({ handleCreate, product, setProduct }) => {
 
     const getAllCategories = async (req, res) => {
         try {
-          const { data } = await axios.get('http://localhost:8080/api/v1/category/all-categories');
+          const { data } = await axios.get(`${config.REACT_APP_API}/category/all-categories`);
           if (data.success) {
             setCategory(data.categories);
           }
@@ -23,7 +24,7 @@ const ProductForm = ({ handleCreate, product, setProduct }) => {
       }
     const getAllBrands = async (req,res)=>{
         try {
-            const {data} = await axios.get('http://localhost:8080/api/v1/brand/all-brands');
+            const {data} = await axios.get(`${config.REACT_APP_API}/brand/all-brands`);
             console.log(data);
             if(data.success){
                 setBrand(data.brands);

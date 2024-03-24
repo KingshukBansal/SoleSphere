@@ -98,7 +98,7 @@ const CartPage = () => {
                     <>
                     <div className="flex flex-row p-4 mx-2 max-tablet:flex-col">
 
-                      <div className='flex self-center w-1/4 max-h-[170px] bg-tertiary rounded-lg overflow-hidden max-tablet:rounded-lg max-tablet:min-w-[170px]'><img src={`http://localhost:8080/api/v1/product/get-photo/${product._id}`} className="h-fit self-center overflow-hidden max-tablet:max-w-[170px] max-tablet:self-center" alt="..." /></div>
+                      <div className='flex self-center w-1/4 max-h-[170px] bg-tertiary rounded-lg overflow-hidden max-tablet:rounded-lg max-tablet:min-w-[170px]'><img src={`${config.REACT_APP_API}/product/get-photo/${product._id}`} className="h-fit self-center overflow-hidden max-tablet:max-w-[170px] max-tablet:self-center" alt="..." /></div>
 
                       <div className="w-3/4 text-xl text-left m-4 max-tablet:text-lg max-tablet:m-1">
                         <div  className="font-bold inline-block">Name:</div>{product.name}

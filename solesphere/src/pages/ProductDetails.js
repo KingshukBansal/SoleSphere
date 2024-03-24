@@ -4,6 +4,7 @@ import { useParams,Link } from 'react-router-dom';
 import axios from 'axios'
 import ShowCard from '../components/ShowCard'
 import { useCart } from '../context/cart'
+import config from '../config/config';
 const ProductDetails = () => {
 
   const [cart,setCart] =useCart();
@@ -12,7 +13,7 @@ const ProductDetails = () => {
   const params = useParams();
   const getProduct = async(req,res) =>{
     try {
-      const {data} = await axios.get(`http://localhost:8080/api/v1/product/get-product/${params.id}`)
+      const {data} = await axios.get(`${config.REACT_APP_API}/product/get-product/${params.id}`)
       setProduct(data.product)
     } catch (error) {
       console.log(error);
@@ -20,7 +21,7 @@ const ProductDetails = () => {
   }
   const getSimillarProducts = async(req,res) =>{
     try {
-      const {data} = await axios.get(`http://localhost:8080/api/v1/product/get-product-recommendation/${product.category._id}/${product._id}`)
+      const {data} = await axios.get(`${config.REACT_APP_API}/product/get-product-recommendation/${product.category._id}/${product._id}`)
       console.log(data);
        setRecomendedProducts(data.products);
     } catch (error) {
@@ -39,7 +40,7 @@ const ProductDetails = () => {
     <Layout title={"Product Details"} description={"Here you will get all details of the product"}>
 
     <div className='flex flex-row p-3 max-tablet:flex-col max-tablet:justify-around'>
-     { product&&<img src={`http://localhost:8080/api/v1/product/get-photo/${product._id}`} className="max-h-[600px] max-w-[50%] overflow-hidden w-auto rounded-xl max-tablet:max-w-full" alt="..."/>}
+     { product&&<img src={`${config.REACT_APP_API}/product/get-photo/${product._id}`} className="max-h-[600px] max-w-[50%] overflow-hidden w-auto rounded-xl max-tablet:max-w-full" alt="..."/>}
 
       <div className="details bg-white rounded-xl ms-4 w-full p-4 max-tablet:ml-0 max-tablet:mt-4">
         <h2 className='font-bold'>Name:{product.name}</h2>

@@ -5,7 +5,7 @@ import CreateProductForm from '../../components/forms/ProductForm'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 import axios from 'axios'
-
+import config from '../../config/config'
 
 const CreateProduct = () => {
   const [product, setProduct] = useState({
@@ -39,7 +39,7 @@ const CreateProduct = () => {
 
       
       console.log('FormData:', formData.name);
-      const { data } = await axios.post('http://localhost:8080/api/v1/product/create-product', formData)
+      const { data } = await axios.post(`${config.REACT_APP_API}/product/create-product`, formData)
       if (data.success) {
         toast.success("Product is created")
         setProduct({

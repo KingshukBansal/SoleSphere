@@ -3,6 +3,7 @@ import Layout from '../../components/layouts/Layout';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import {useNavigate} from 'react-router-dom';
+import config from '../../config/config';
 const ForgotPassword = () => {
     const [formData, setFormData] = useState({
         email: '',
@@ -20,7 +21,7 @@ const ForgotPassword = () => {
         e.preventDefault();
 
         try{
-            const res= await axios.post("http://localhost:8080/api/v1/auth/forgotpassword",formData);
+            const res= await axios.post(`${config.REACT_APP_API}/auth/forgotpassword`,formData);
             if(res.data.success){
                 toast.success('Passwrod Changed Success');
 

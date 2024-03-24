@@ -6,7 +6,7 @@ import { useState,useEffect } from 'react'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import ShowCard from '../../components/ShowCard'
-
+import config from '../../config/config'
 
 const Product = () => {
 
@@ -14,7 +14,7 @@ const Product = () => {
 
   const getAllProducts = async (req,res) => {
     try {
-      const {data} = await axios.get('http://localhost:8080/api/v1/product/all-products');
+      const {data} = await axios.get(`${config.REACT_APP_API}/product/all-products`);
       if(data.success){
         setProducts(data.products);
       }

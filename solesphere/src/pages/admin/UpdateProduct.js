@@ -7,13 +7,14 @@ import { toast } from 'react-toastify'
 import axios from 'axios'
 import UpdateProductForm from '../../components/forms/UpdateProductForm'
 import { useNavigate } from 'react-router-dom'
+import config from '../../config/config'
 const UpdateProduct = () => {
     const [product,setProduct] = useState({});
     const {id}= useParams();
     const Navigate = useNavigate();
     const getProduct = async(req,res)=>{
         try {
-            const {data}=await axios.get(`http://localhost:8080/api/v1/product/get-product/${id}`);
+            const {data}=await axios.get(`${config.REACT_APP_API}/product/get-product/${id}`);
             if(data.success){
 
                 setProduct(data.product);
@@ -41,7 +42,7 @@ const UpdateProduct = () => {
       product.photo&&formData.append('photo', product.photo);
       formData.append('shipping', product.shipping);
       formData.append('description', product.description);
-      const { data } = await axios.put(`http://localhost:8080/api/v1/product/update-product/${product._id}`, formData)
+      const { data } = await axios.put(`${config.REACT_APP_API}/product/update-product/${product._id}`, formData)
       if (data.success) {
         toast.success("Product is updated")
     }
@@ -53,7 +54,7 @@ const UpdateProduct = () => {
     const handleDelete = async (e) => {
         e.preventDefault()
         try {
-            const { data } = await axios.delete(`http://localhost:8080/api/v1/product/delete-product/${product._id}`)
+            const { data } = await axios.delete(`${config.REACT_APP_API}/product/delete-product/${product._id}`)
             if (data.success) {
                 toast.success("Product is deleted")
                 setProduct({})

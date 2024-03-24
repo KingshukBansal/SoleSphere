@@ -6,6 +6,7 @@ import { toast } from 'react-toastify'
 import axios from 'axios'
 import BrandForm from '../../components/forms/BrandForm'
 import { Modal } from 'antd'
+import config from '../../config/config'
 const CreateBrand = () => {
 
   const [brand, setbrand] = useState([]);
@@ -16,7 +17,7 @@ const CreateBrand = () => {
   const [deleteBrand, setDeleteBrand] = useState({});
   const getAllBrands = async (req, res) => {
     try {
-      const { data } = await axios.get('http://localhost:8080/api/v1/brand/all-brands');
+      const { data } = await axios.get(`${config.REACT_APP_API}/brand/all-brands`);
       
      if (data.success) {
         setbrand(data.brands);
@@ -31,7 +32,7 @@ const CreateBrand = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const { data } = await axios.post('http://localhost:8080/api/v1/brand/create-brand', { name: value });
+      const { data } = await axios.post(`${config.REACT_APP_API}/brand/create-brand`, { name: value });
       if (data.success) {
 
         toast.success(`${data.brand.name} is created successfully`)
@@ -50,7 +51,7 @@ const CreateBrand = () => {
     e.preventDefault();
     try {
 
-      const { data } = await axios.put(`http://localhost:8080/api/v1/brand/update-brand/${prevbrand._id}`, { name: updateName });
+      const { data } = await axios.put(`${config.REACT_APP_API}/brand/update-brand/${prevbrand._id}`, { name: updateName });
       if (data.success) {
         toast.success(`${prevbrand.name} is get converted to ${data.brand.name} successfully`)
         getAllBrands();
@@ -77,7 +78,7 @@ const CreateBrand = () => {
   }
   const handleDelete = async (e) => {
     try {
-      const { data } = await axios.delete(`http://localhost:8080/api/v1/brand/delete-brand/${deleteBrand._id}`)
+      const { data } = await axios.delete(`${config.REACT_APP_API}brand/delete-brand/${deleteBrand._id}`)
       if (data.success) {
         toast.success(`${data.brand.name} got deleted successfully`);
         getAllBrands();

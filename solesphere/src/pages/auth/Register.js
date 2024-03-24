@@ -3,7 +3,7 @@ import Layout from "../../components/layouts/Layout";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-
+import config from "../../config/config";
 const Register = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -24,7 +24,7 @@ const Register = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:8080/api/v1/auth/register",
+        `${config.REACT_APP_API}/auth/register`,
         formData
       );
       if (res.data.success) {
