@@ -8,6 +8,7 @@ const categoryRouter=require('./routes/categoryRoutes');
 const productRouter=require('./routes/productRoutes');
 const brandRouter= require('./routes/brandRoutes');
 const orderRouter = require('./routes/orderRoutes');
+const path = require("path");
 const cors=require('cors');
 // Load config
 dotenv.config();
@@ -20,6 +21,7 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 
+app.use(express.static(path.join(__dirname, "build"))); // put this line of code in app.js
 
 // Mount routers
 app.use('/api/v1/auth',authRouter);
