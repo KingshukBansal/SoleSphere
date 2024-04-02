@@ -11,7 +11,7 @@ const AdminMenu = () => {
   <Link to="/dashboard/admin/createbrand" className='headerList m-4' >Create Brand</Link>
   <Link to="/dashboard/admin/products" className="headerList m-4">Products</Link >
   <Link to='/dashboard/admin/orders' className='headerList m-4'>Orders</Link>
-  <Link to="/dashboard/admin/users" className=" headerList m-4">Users</Link >
+  {/* <Link to="/dashboard/admin/users" className=" headerList m-4">Users</Link > */}
 </div>
 </>  )
 }

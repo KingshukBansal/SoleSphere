@@ -93,9 +93,9 @@ const AdminOrder = () => {
           </div>
 
           <div className='w-3/4 m-4 flex bg-tertiary rounded-2xl justify-center max-tablet:w-auto'>
-            <div className='p-5 flex flex-col max-tablet:w-auto'>
+            <div className='p-5 flex flex-col max-tablet:w-auto  overflow-x-auto'>
             <h3 className='text-4xl text-center font-bold mb-12 '>Orders</h3>
-              <table className="table bg-white m-4">
+              <table className="table bg-white m-4 ">
                 <thead className="">
                   <tr className="">
                     <th>#</th>
