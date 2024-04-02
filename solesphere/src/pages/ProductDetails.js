@@ -40,7 +40,8 @@ const ProductDetails = () => {
     <Layout title={"Product Details"} description={"Here you will get all details of the product"}>
 
     <div className='flex flex-row p-3 max-tablet:flex-col max-tablet:justify-around'>
-     { product&&<img src={`${config.REACT_APP_API}/product/get-photo/${product._id}`} className="max-h-[600px] max-w-[50%] overflow-hidden w-auto rounded-xl max-tablet:max-w-full" alt="..."/>}
+     { product&&
+     <img src={`${config.REACT_APP_API}/product/get-photo/${product._id}`} className="max-h-[600px] min-h-[300px] overflow-hidden rounded-xl max-tablet:max-w-full" alt="..."/>}
 
       <div className="details bg-white rounded-xl ms-4 w-full p-4 max-tablet:ml-0 max-tablet:mt-4">
         <h2 className='font-bold'>Name:{product.name}</h2>
