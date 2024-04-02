@@ -39,7 +39,7 @@ const ProductDetails = () => {
   return (
     <Layout title={"Product Details"} description={"Here you will get all details of the product"}>
 
-    <div className='flex flex-row p-3 max-tablet:flex-col max-tablet:justify-around'>
+    <div className='flex flex-row p-3 justify-start max-tablet:flex-col max-tablet:justify-around'>
      { product&&
      <img src={`${config.REACT_APP_API}/product/get-photo/${product._id}`} className="max-h-[600px] min-h-[300px] overflow-hidden rounded-xl max-tablet:max-w-full" alt="..."/>}
 

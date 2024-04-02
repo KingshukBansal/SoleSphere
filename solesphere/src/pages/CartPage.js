@@ -80,7 +80,7 @@ const CartPage = () => {
           </div>
           <div className="font-bold text-2xl w-2/3 self-center my-1 max-tablet:w-full max-tablet:text-lg">
 
-          {cart?.length > 1
+          {cart?.length >= 1
             ? `you have ${cart.length} items in your cart ${
               auth.token ? "" : "Login to checkout"
             }`
