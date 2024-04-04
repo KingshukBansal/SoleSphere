@@ -14,7 +14,7 @@ Check out the live demo of SoleSphere at [SoleSphere Live Demo](https://sole-sph
 ## Features
 
 - **Cart**: Users can add desired shoes to their cart for convenient checkout.
-- **Filters**: Seamless filtering options enable users to narrow down their search based on various criteria such as size, color, brand, etc.
+- **Filters**: Seamless filtering options enable users to narrow down their search based on various criteria such as size, category, brand, etc.
 - **Search**: A robust search functionality allows users to quickly find specific shoes.
 - **Admin Dashboard**: Administrators can manage inventory, track orders, and perform various administrative tasks through the dedicated dashboard.
 - **Responsive Design**: The website is designed to be responsive, providing an optimal viewing experience across a wide range of devices, from mobile phones to desktop computers.
