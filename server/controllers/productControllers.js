@@ -115,42 +115,53 @@ const updateProduct=async(req,res)=>{
 }
 const filterProduct = async (req, res) => {
     try {
-        const { categories, price, brands, sizes, discount } = req.body;
-        productsPerPage=8;
-        const page=req.params.page!=1?req.params.page:2;
-        let args = {};
-        if (categories.length) {
-            args.category={$in:categories};
-        }
-        if(brands.length){
-            args.brand={$in:brands};
-        }
-        if(discount.length){
-            args.discount={$gte: discount[0],$lte:discount[1]}
-        }
-        if(sizes.length){
-            args.availableSizes={$in:sizes};
-        }
-
-
-        
-
-        
-        if (price.length) args.price = { $gte: price[0], $lte: price[1] };
-       const products = await productModel.find(args).skip((page-1)*productsPerPage).limit(productsPerPage).populate('category').select('-photo').sort({createdAt:-1});
-        res.status(200).send({
-            success: true,
-            products,
-        });
+      const { categories = [], price = [], brands = [], sizes = [], discount = [] } = req.body;
+      const productsPerPage = 8;
+      const page = parseInt(req.params.page, 10) || 1; // Ensure page is a number and defaults to 1
+  
+      let args = {};
+  
+      // Building query arguments
+      if (categories.length > 0) {
+        args.category = { $in: categories };
+      }
+      if (brands.length > 0) {
+        args.brand = { $in: brands };
+      }
+      if (discount.length === 2) { // Check that discount range is valid
+        args.discount = { $gte: discount[0], $lte: discount[1] };
+      }
+      if (sizes.length > 0) {
+        args.availableSizes = { $in: sizes };
+      }
+      if (price.length === 2) { // Ensure price range is valid
+        args.price = { $gte: price[0], $lte: price[1] };
+      }
+  
+      // Query database with pagination
+      const products = await productModel
+        .find(args)
+        .skip((page - 1) * productsPerPage)
+        .limit(productsPerPage)
+        .populate('category')
+        .select('-photo')
+        .sort({ createdAt: -1 });
+  
+      // Send response
+      res.status(200).send({
+        success: true,
+        products,
+      });
     } catch (error) {
-        console.log(error);
-        res.status(400).send({
-            success: false,
-            error: error.message,
-            message: "Products can't be filtered",
-        });
+      console.error('Error filtering products:', error); // Log error with additional context
+      res.status(400).send({
+        success: false,
+        error: error.message,
+        message: "Products can't be filtered",
+      });
     }
-};
+  };
+  
 
 const totalProductCount = async(req,res)=>{
     try {

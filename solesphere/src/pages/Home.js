@@ -75,6 +75,7 @@ const Home = () => {
   const filterProducts = async (req, res) => {
     try {
       setLoading(true);
+      console.log("HELLO2");
       const { data } = await axios.post(
         `${config.REACT_APP_API}/product/products-filter/${filterPage}`,
         {
@@ -168,6 +169,7 @@ const Home = () => {
     loadMore();
   }, [page]);
   useEffect(() => {
+    console.log("hello3");
     if (filterPage === 0) {
       return;
     }
@@ -201,18 +203,23 @@ const Home = () => {
 
   useEffect(() => {
     if (
-      selectedCategories.length ||
-      price.length ||
-      selectedBrands.length ||
-      discount.length ||
-      sizes.length
+      selectedCategories.length > 0 ||
+      price.length > 0 ||
+      selectedBrands.length > 0 ||
+      discount.length > 0 ||
+      sizes.length > 0
     ) {
-      setProducts([]);
       setFilterPage(1);
+      
+      setProducts([]);
+      if(filterPage > 0){
+
+        filterProducts();
+      }
     }
   }, [
     selectedCategories.length,
-    price,
+    price.length,
     selectedBrands.length,
     discount.length,
     sizes.length,

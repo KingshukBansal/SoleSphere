@@ -37,7 +37,10 @@ To run this project locally, follow these steps:
 4. Start the server by running `npm start` in the server directory.
 5. Start the client by running `npm start` in the client directory.
 6. Access the application at `http://localhost:3000`.
-
+## Backend Architecture
+<div align="center">
+  <img src = "images/Architecture.jpg" alt = "Architecture" width="800" height ="autp">
+</div>
 ## Screenshots
 <div align="center">
   <img src="images/1.png" alt="Screenshot 1" width="800" height="auto" />
